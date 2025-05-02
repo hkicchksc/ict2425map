@@ -1,0 +1,11 @@
+.heavy {
+  font: bold 4rem Tiny5;
+}
+
+* {
+  font-family: 'Tiny5', 'DotGothic16';
+}
+
+.title {
+  font: bold 5rem Tiny5, DotGothic16;
+}
