@@ -48,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showDialog(i) {
-  console.log(i);
   const dialog = document.createElement('div');
   dialog.style.position = 'fixed';
   dialog.style.top = '50%';
@@ -68,9 +67,13 @@ function showDialog(i) {
 
   dialog.innerHTML = `
           <div>${dialogContent[i]}</div>
-          <button id="closeDialog" style="float:right; margin-top: 15px; padding: 10px 15px; border: none; background-color: ${i == 2 ? '#888' : `hsl(${i * 40}, 100%, 50%)`
+          <button id="closeDialog" style="float:left; margin-top: 15px; padding: 10px 15px; border: none; background-color: ${i == 2 ? '#888' : `hsl(${i * 40}, 100%, 50%)`
     }; color: white; border-radius: 5px; cursor: pointer;">
               Close
+          </button>
+          <button id="nextDialog" style="float:right; margin-top: 15px; padding: 10px 15px; border: none; background-color: ${i + 1 == 2 ? '#888' : `hsl(${((i + 1) % 8) * 40}, 100%, 50%)`
+    }; color: white; border-radius: 5px; cursor: pointer;">
+              Next
           </button>
       `;
 
@@ -79,6 +82,12 @@ function showDialog(i) {
   // Close dialog on button click
   document.getElementById('closeDialog').onclick = () => {
     document.body.removeChild(dialog);
+  };
+
+  document.getElementById('nextDialog').onclick = (event) => {
+    event.stopPropagation();
+    document.body.removeChild(dialog);
+    showDialog((i + 1) % 8)
   };
 
   // Close dialog when clicking outside of it
